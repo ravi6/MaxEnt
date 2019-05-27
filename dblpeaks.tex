@@ -11,6 +11,12 @@
 	]
        \addplot[color=blue, line width=2pt, samples=100] 
 	  {8*(1-2*x*x)*x*x)} ;
+          
+       \addplot[only marks, mark options={fill=green,scale=2} ]
+          coordinates { (-0.5, 1) (0.5, 1) } ;
+       \addplot[only marks, mark options={fill=red,scale=2} ]
+	  coordinates { (0,0) };
+	  
 	  
     \end{axis}
   \end{tikzpicture}

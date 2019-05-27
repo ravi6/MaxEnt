@@ -15,11 +15,11 @@
 \usetikzlibrary{decorations.pathmorphing}
 \usetikzlibrary{arrows.meta, shadows, shapes.symbols}
 \graphicspath{ {./images/} }
-\pgfplotsset{compat=1.15}
+%%\pgfplotsset{compat=1.15}
 
 \begin{document}
 
-\title{Derivation of determining extrema of a function with MaxEnt formulation}
+\title{On determination of function extrema with MaxEnt formulation}
 \author{Ravi Sankar Saripalli}
 
 \maketitle
@@ -27,12 +27,12 @@
 \begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
                   title=Description]
 
-                  This is an attempt to see how determination of extrema of a function can be determined
-                  with MaxEnt formulation. Given  $f(x)$ find its extrema (max/min). Usual way to
-                  achieve this is to manipulate $x$ to determine extrema looking for $x$ where function
+                  This is an attempt to find extrema of a function 
+                  with MaxEnt formulation. The usual way to
+                  find extrema of a function $f(x)$  is to find $x$ where function
                   derivative $f^\prime (x)$ vanishes. An alternate approach is to use probability distribution function
-                  $p(x)$ as an independant parameter and seek to maximize expected value of $f(x)$ with the
-                  condition that entropy (as defined by Shanon) of the probability distribution $p(x)$ is maximized, thus
+                  $p(x)$ as an independant parameteric function and seek to maximize the expected value of $f(x)$ based on the
+                  $p(x)$ with the condition that entropy (as defined by Shanon) of the probability distribution $p(x)$ is maximized, thus
                   ensuring that the distribution function derived is least biased.
 
 \end{tcolorbox}
@@ -60,6 +60,9 @@
     criterion to determine if the extrema is either 
     minimum or maximum. Whether one can use the sign of the  second derivative in functional space 
     similar to simple variables can be used for this purpose is yet to be explored by me....
+
+    Also, what role the scaling multiplier $T$ on the entropy function in the overall objective is not very clear
+    to me.
 \end{tcolorbox}
 
 \begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
@@ -144,6 +147,7 @@ Combining eqns. 5 and 6 the value of lambda can be expressed as follows
 
 \begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
   title={$sin(x)$} ]
+    \centering
      \input{sinx}
 \end{tcolorbox}
 
@@ -161,11 +165,34 @@ tends to peak around the true maxima. On the otherhand,
 when $T \ge 0$, the pdf peaks appear near the end points where
 the function has minimal value in the interval of interest. 
 
-
+Let us now explore a different function that has two peaks, and trough as shown in the
+following figure. 
 \begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
-  title={$y(x)=8(1-2x^2)x^2$} ]
+    title={$y(x)=8(1-2x^2)x^2  -0.6<x<0.6  $} ]
+    \centering
      \input{dblpeaks}
 \end{tcolorbox}
+
+Using the above function, the effect of $T$ on PDF corresponding to the stationary
+point is determined as described earlier.
+
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+    title={Effect of $T$ on PDF at stationary condition}  ]
+     \includegraphics[scale=0.3]{fig3.jpg}
+     \hspace{1cm}
+     \includegraphics[scale=0.3]{fig4.jpg}
+\end{tcolorbox}
+
+Once again, when $T$ value is approaching zero from positive side,
+the PDF corresponding to extrema condition peaks around the true minima
+at $x=0$ with corresponding expected value of function approaching 0.
+When $T$ approaches zero from the negative side, the PDF peaks around
+$x=-0.5, and 0.5$ with expected value of function approaching 1.
+
+It therefore appears that when $T$ approaches zero from negative side
+PDF determined from stationary condition corresponds to maxima of the function,
+while it approaches zero from positive side, the PDF peaks around the minima of the 
+function.
 
 
 \end{document}

@@ -3,7 +3,7 @@ function dblpeaks
 h = figure ;
 grid on ;
 %V =-[0.01/2, 0.1, 0.3, 0.5, 1, 3, 5, 10]';
-V = [0.05, 0.3, 0.5, 10]';
+V = -[0.05, 0.3, 0.5, 10]';
 
  for i = 1:size(V)
   T = V(i) ;
