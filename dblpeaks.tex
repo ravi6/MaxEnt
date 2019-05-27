@@ -1,0 +1,16 @@
+%% Generate 8*(1-2*x^2)*x^2
+%%  between x=-0.6 to 0.6
+
+  \begin{tikzpicture}
+    \begin{axis}[ xlabel = $x$,
+	  ylabel = {$y(x)=8(1-2x^2)x^2$},
+	  ymin = -0.1, ymax = 1.1,
+	  xmin = -0.7, xmax = 0.7,
+	  grid=both,
+	  domain = -0.6:0.6
+	]
+       \addplot[color=blue, line width=2pt, samples=100] 
+	  {8*(1-2*x*x)*x*x)} ;
+	  
+    \end{axis}
+  \end{tikzpicture}

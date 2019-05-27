@@ -1,0 +1,171 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{empheq}
+\usepackage{hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage{verbatim}
+\usepackage{pgfplots}
+\usepackage{pgf,tikz}
+\usepackage{geometry}
+\geometry{a4paper, total={170mm,257mm},
+           left=20mm, top=20mm }
+
+\usetikzlibrary{positioning, patterns}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{arrows.meta, shadows, shapes.symbols}
+\graphicspath{ {./images/} }
+\pgfplotsset{compat=1.15}
+
+\begin{document}
+
+\title{Derivation of determining extrema of a function with MaxEnt formulation}
+\author{Ravi Sankar Saripalli}
+
+\maketitle
+
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+                  title=Description]
+
+                  This is an attempt to see how determination of extrema of a function can be determined
+                  with MaxEnt formulation. Given  $f(x)$ find its extrema (max/min). Usual way to
+                  achieve this is to manipulate $x$ to determine extrema looking for $x$ where function
+                  derivative $f^\prime (x)$ vanishes. An alternate approach is to use probability distribution function
+                  $p(x)$ as an independant parameter and seek to maximize expected value of $f(x)$ with the
+                  condition that entropy (as defined by Shanon) of the probability distribution $p(x)$ is maximized, thus
+                  ensuring that the distribution function derived is least biased.
+
+\end{tcolorbox}
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+                  title=The MaxEnt Lagrangian]
+
+%% Equation 1
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+       \mathcal{L} (p, \lambda ) = \int f(x) p(x) dx 
+                                    + T  \int p(x) ln(p(x)) dx 
+                                    + \lambda \left \{ \left ( \int p(x) dx \right ) - 1 \right \}  
+  \end{split}
+\end{empheq}
+
+    The first term in the Lagrangian is the expected value of the function corresponding to the PDF $p(x)$,
+    the second term corresponds
+    to the entropy of the PDF scaled by an arbitray constant $T$ and the last  term corresponds to the equality 
+    constraint that integral of PDF is one. The multiplier $\lambda$ is the Lagrangian parameter.
+\\
+    Noting that the Lagrangian is function of $p(x)$ and $\lambda$,  the extrema of the Lagrangian is obtained
+    by requiring the functional derivative with respect $p(x)$ and the Lagrangian parameter $\lambda$ are zero.
+    
+    Although this enables us to determine $p(x)$ and $\lambda$ corresponding to the extrema, we need additional
+    criterion to determine if the extrema is either 
+    minimum or maximum. Whether one can use the sign of the  second derivative in functional space 
+    similar to simple variables can be used for this purpose is yet to be explored by me....
+\end{tcolorbox}
+
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+                  title=The Euler-Lagrange equation]
+
+Consider the following functional (function of functions)
+%% Equation 2
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+      & F \left( f^{\prime}, f, x \right) = \int \phi \left ( f^{\prime} (x), f(x), x \right) dx  
+  \end{split}
+\end{empheq}
+
+  Requiring that functional derivative of $F$ with respect to $f$ is zero at extrema  
+ (note $f$ is a function not a variable, hence 
+   the name functional derivative) following Eauler-Lagrange  equation can be derived.
+
+%% Equation 3
+\begin{empheq}[box=\tcbhighmath]{equation}
+       \frac{\partial \phi}{\partial y}
+          - \frac{d}{dx}\left( \frac{\partial \phi}{\partial y^\prime} \right) = 0 
+\end{empheq}
+    \text{Derivation of the above equation that is easy to follow is  
+    \href{https://farside.ph.utexas.edu/teaching/336L/Fluid/node266.html}{here}}
+
+\end{tcolorbox}
+
+
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+                  title=Finding Stationary Point of Lagrangian in Eq 1.]
+
+Using the above Euler-Lagrange equation, the stationary conditions for the Lagrangian in equation 1, 
+can be derived from functional derivative with respective $p$ and the 
+derivative with respective $\lambda$ as follows.
+
+%%Equation 4
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+      & f(x) + T \left\{ 1  + ln(p(x)) \right\} + \lambda = 0
+  \end{split}
+\end{empheq}
+
+%%Equation 5
+Setting derivative with respect to $\lambda$ to zero yields the contraint that PDF integral should be 1.
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+      & \int p(x) \:  dx  - 1 = 0  
+  \end{split}
+\end{empheq}
+
+%%Equation 6
+Rearranging eqn.4 
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+      &  p(x) =  e^{ -\left( 1 + \lambda / T  \right) }   \: e^{-f(x)/T}
+  \end{split}
+\end{empheq}
+
+Combining eqns. 5 and 6 the value of lambda can be expressed as follows
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+      &  \lambda = T \left\{ ln \int e^{-f(x)/T} dx  - 1 \right\}
+  \end{split}
+\end{empheq}
+
+    The question to ask is how do we now proceed to get min or max of $f(x)$ given that we have it
+    in analytical form (eg. sin(x)).. What will be the p(x) as T approaches zero. That is the intent
+    of the annealing process as we converge on p(x).
+\end{tcolorbox}
+
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+                   title=Explorations with sinx ]
+  Assuming that we are interested in finding extrema of sin(x) in the interval $[0,\pi]$,
+  one can proceed as follows.
+  \begin{enumerate}
+     \item {For a given T, calculate $\lambda$ by evaluating the integral numerically}
+     \item {With $T and \lambda$ known, the PDF $p(x)$ now is well defined (eq.6). The expected value of $f(x)$ can be
+       determined by numerical integration of $\int p(x) f(x) dx$ }
+  \end{enumerate}
+ 
+\end{tcolorbox}
+
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+  title={$sin(x)$} ]
+     \input{sinx}
+\end{tcolorbox}
+
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+  title={Change in pdf with T when $T \le 0$ and $T \ge 0$} ]
+     \includegraphics[scale=0.25]{fig1.jpg}
+     \hspace{1cm}
+     \includegraphics[scale=0.32]{fig2.jpg}
+\end{tcolorbox}
+
+
+From the above figures, it is clear that for $T \ge 0$ as its 
+magnitude approaches zero, the pdf spread decreases and
+tends to peak around the true maxima. On the otherhand,
+when $T \ge 0$, the pdf peaks appear near the end points where
+the function has minimal value in the interval of interest. 
+
+
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+  title={$y(x)=8(1-2x^2)x^2$} ]
+     \input{dblpeaks}
+\end{tcolorbox}
+
+
+\end{document}
