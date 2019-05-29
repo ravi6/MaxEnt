@@ -2,6 +2,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{empheq}
+\usepackage{cancel}
 \usepackage{hyperref}
 \usepackage[most]{tcolorbox}
 \usepackage{verbatim}
@@ -16,6 +17,16 @@
 \usetikzlibrary{arrows.meta, shadows, shapes.symbols}
 \graphicspath{ {./images/} }
 %%\pgfplotsset{compat=1.15}
+
+\newcommand{\pder}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\fe}{f + \epsilon \eta}
+\newcommand{\fep}{f^\prime + \epsilon \eta^\prime}
+
+\newcommand{\PHI}{\phi\left(f, f^\prime, x\right)}
+\newcommand{\PHIe}{\phi\left(\fe, \fep, x\right)}
+\newcommand{\delFfEta}{\left < \nabla F_f \: , \eta \right >} 
+\newcommand{\delxFfEta}{\left < \nabla^2 F_f \: , \eta \right >} 
+
 
 \begin{document}
 
@@ -58,11 +69,10 @@
     
     Although this enables us to determine $p(x)$ and $\lambda$ corresponding to the extrema, we need additional
     criterion to determine if the extrema is either 
-    minimum or maximum. Whether one can use the sign of the  second derivative in functional space 
-    similar to simple variables can be used for this purpose is yet to be explored by me....
+    minimum or maximum. Sign of the second derivative in functional space 
+    similar to simple variables can be used to ascertain if the stationary point corresponds to minima or maxima.
 
-    Also, what role the scaling multiplier $T$ on the entropy function in the overall objective is not very clear
-    to me.
+
 \end{tcolorbox}
 
 \begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
@@ -195,4 +205,72 @@ while it approaches zero from positive side, the PDF peaks around the minima of 
 function.
 
 
+
+
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+                  title={Functional Derivatives} ]
+In this section the derivation of functional derivatives 
+is provided. While there is no shortage of articles on this topic,
+thesis work by 
+\href{https://www2.math.uconn.edu/~gordina/NelsonAaronHonorsThesis2012.pdf}{Aaron Neson}
+provides lucid explanation.
+
+    Let $\eta(x)$ be an arbitrary function which vanishes to zero at the boundaries, and 
+    $\epsilon$ is an arbitrarily small constant. For the functional $F$ defined in equaiton 2,
+    we denote its gradient with respect to $f(x)$ with
+    $\nabla F_f$, and $\eta(x)$ is the variation of function $f(x)$, then
+
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+      & \delFfEta = \frac{d}{d\epsilon} F\left(\fe\right) \Bigr\rvert_{\epsilon=0} \\
+      & \text{where} \\     
+      & \left < \nabla F_f, \eta \right > = \int \nabla F_f \eta (x) dx \\
+  \end{split}
+\end{empheq}
+
+\begin{equation*}
+  \begin{split}
+      \delFfEta  &=  \frac{d}{d \epsilon} \int  {\PHIe} dx  \Bigr\rvert_{\epsilon=0} \\
+                 &= \int \left\{
+                    \eta \pder{\PHIe}{\left(\fe\right)}
+                   + \eta^\prime \pder{\PHIe}{\left(\fep\right)}
+                   \right\} dx
+                   \Bigr\rvert_{\epsilon=0} \\
+                 &= \int \left\{
+                    \eta \pder{\PHI}{f}
+                  + \eta^\prime  \pder{\PHI}{f^\prime}
+                 \right\} dx \\ 
+                 &= \int  \eta \pder{\PHI}{f} dx 
+                    + \cancelto{0}{\Bigg[\eta \pder{\PHI}{f} \Bigg]_{a}^{b}} 
+                    - \int  \eta \frac{d}{dx} \left\{ \pder{\PHI}{f^\prime} \right\} dx  \\
+                 &= \int  \eta \Bigg[
+                                   \pder{\PHI}{f}  -
+                                    \frac{d}{dx} \left\{ \pder{\PHI}{f^\prime} \right\} 
+                      \Bigg] dx  \\
+  \end{split}              
+\end{equation}
+
+     Since $\eta(x)$ is arbitray function
+     
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+      \nabla F_f = \pder{\PHI}{f}  
+                   - \frac{d}{dx} \left\{ \pder{\PHI}{f^\prime} \right\}
+  \end{split}
+\end{empheq}
+
+Similarly the second variation of $f$ can be defined as follows
+
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+      & \delxFfEta = \frac{d^2}{d\epsilon^2} F\left(\fe\right) \Bigr\rvert_{\epsilon=0} \\
+      & = \frac{d}{d\epsilon} \delFfEta  \Bigr\rvert_{\epsilon=0} \\
+  \end{split}
+\end{empheq}
+
+
+\end{tcolorbox}
+
+
 \end{document}
+
