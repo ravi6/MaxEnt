@@ -19,6 +19,7 @@
 %%\pgfplotsset{compat=1.15}
 
 \newcommand{\pder}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pders}[2]{\frac{\partial^2 #1}{{\partial #2}^2}}
 \newcommand{\fe}{f + \epsilon \eta}
 \newcommand{\fep}{f^\prime + \epsilon \eta^\prime}
 
@@ -224,7 +225,7 @@ provides lucid explanation.
   \begin{split}
       & \delFfEta = \frac{d}{d\epsilon} F\left(\fe\right) \Bigr\rvert_{\epsilon=0} \\
       & \text{where} \\     
-      & \left < \nabla F_f, \eta \right > = \int \nabla F_f \eta (x) dx \\
+      & \left < \nabla F_f, \eta \right > = \int \nabla F_f \eta (x) dx 
   \end{split}
 \end{empheq}
 
@@ -246,9 +247,9 @@ provides lucid explanation.
                  &= \int  \eta \Bigg[
                                    \pder{\PHI}{f}  -
                                     \frac{d}{dx} \left\{ \pder{\PHI}{f^\prime} \right\} 
-                      \Bigg] dx  \\
+                      \Bigg] dx 
   \end{split}              
-\end{equation}
+\end{equation*}
 
      Since $\eta(x)$ is arbitray function
      
@@ -259,18 +260,67 @@ provides lucid explanation.
   \end{split}
 \end{empheq}
 
-Similarly the second variation of $f$ can be defined as follows
+Similarly the second variation of $f$ can be defined and evaluated as follows.
+It should be noted that unlike, the first variation, it is not possible to 
+eliminate $\eta\prime$ through integration by parts.
 
 \begin{empheq}[box=\tcbhighmath]{equation}
   \begin{split}
-      & \delxFfEta = \frac{d^2}{d\epsilon^2} F\left(\fe\right) \Bigr\rvert_{\epsilon=0} \\
-      & = \frac{d}{d\epsilon} \delFfEta  \Bigr\rvert_{\epsilon=0} \\
-  \end{split}
+    Q(f,\eta) &= \frac{d^2}{d\epsilon^2} F\left(\fe\right) \Bigr\rvert_{\epsilon=0} \\
+                 &= \int \left\{
+                    \eta^2 \pders{\phi}{f}
+		  + \left(\eta^\prime\right)^2  \pders{\phi}{f^\prime}
+		  + 2 \eta \eta^\prime \frac{\partial^2{\phi}}
+				            {\partial{f}\partial{f^\prime}}
+		  \right\} dx
+   \end{split}
 \end{empheq}
 
+Similar to normal functions, the sign of the second variation can be used to ascertain if the stationary point of the functional corresponds to either maxima or minima.
+If $Q(f,\eta)$ is positive definite at the stationary point then it is minima.
+
+One way $Q(f,\eta)$ can be positive definite is when the integrand itself is positive definite over the entire integration interval. While that is a valid possibility, it is too prescriptive.
 
 \end{tcolorbox}
 
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+  title={Necessary and sufficient conditions for second functional positivity} ]
+Expressing $Q(f,\eta)$ as follows
+
+\begin{equation*}
+  \begin{split}
+    Q(f,\eta)   &= \int \left\{ A  \eta^2 
+		                  + 2 B \eta \eta^\prime 
+		                  + C \left(\eta^\prime\right)^2  
+		          \right\} dx \\
+     & where \:\:  
+		    A =  \pders{\phi}{f}  \:;\:  
+		    B =  \frac{\partial^2\phi}{\partial f\partial {f^\prime}} \:;\:  
+		    C =  \pders{\phi}{f^\prime}  \\
+     &= \int \left\{ A \eta^2 + B \frac{d}{dx}\left(\eta^2\right)    
+		                  + C \left(\eta^\prime\right)^2  
+		          \right\} dx \\
+     &= \int \left\{ A \eta^2 - B^\prime \eta^2
+		                  + C \left(\eta^\prime\right)^2  
+ 	      \right\} dx  \:\:  
+  \end{split}
+\end{equation*}
+Nb: The last simplification is achieved with integration by parts and  noting $\eta$ vanishes on boundaries
+
+The necessary and sufficient conditions for $Q(f,\eta)$ to be positive requires fairly involved mathematics and is nicely covered in text book (page 100-110) on \href{https://epdf.pub/calculus-of-variations3a9621c1bc7c0b0a7e6500c574abb0e427979.html}{Variational Calculus}
+The two conditions are as follows.
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+    \text{Condition 1:} & \\
+    & C > 0      \\
+    \text{Condition 2:} & \\
+    &\text{The following linear differential has} \\
+    & \text{no other solution but a trivial solution $v=0$} \\
+    &	   \frac{d}{dx} \left( C v \right)  - 
+	   \left( A - B^\prime \right) v = 0
+   \end{split}
+\end{empheq}
+\end{tcolorbox}
 
 \end{document}
 
