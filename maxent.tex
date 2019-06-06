@@ -23,11 +23,17 @@
 \newcommand{\fe}{f + \epsilon \eta}
 \newcommand{\fep}{f^\prime + \epsilon \eta^\prime}
 
-\newcommand{\PHI}{\phi\left(f, f^\prime, x\right)}
-\newcommand{\PHIe}{\phi\left(\fe, \fep, x\right)}
+\newcommand{\PHI}{\phi\lb f, f^\prime, x \rb}
+\newcommand{\PHIe}{\phi\lb fe, \fep, x \rb}
 \newcommand{\delFfEta}{\left < \nabla F_f \: , \eta \right >} 
 \newcommand{\delxFfEta}{\left < \nabla^2 F_f \: , \eta \right >} 
 
+\newcommand{\lb}{\left(}
+\newcommand{\rb}{\right)}
+\newcommand{\lcb}{\left\{}
+\newcommand{\rcb}{\right\}}
+\newcommand{\lsb}{\left[}
+\newcommand{\rsb}{\right]}
 
 \begin{document}
 
@@ -83,7 +89,7 @@ Consider the following functional (function of functions)
 %% Equation 2
 \begin{empheq}[box=\tcbhighmath]{equation}
   \begin{split}
-      & F \left( f^{\prime}, f, x \right) = \int \phi \left ( f^{\prime} (x), f(x), x \right) dx  
+      & F \lb f^{\prime}, f, x \rb = \int \phi \left ( f^{\prime} (x), f(x), x \rb dx  
   \end{split}
 \end{empheq}
 
@@ -94,7 +100,7 @@ Consider the following functional (function of functions)
 %% Equation 3
 \begin{empheq}[box=\tcbhighmath]{equation}
        \frac{\partial \phi}{\partial y}
-          - \frac{d}{dx}\left( \frac{\partial \phi}{\partial y^\prime} \right) = 0 
+          - \frac{d}{dx}\lb \frac{\partial \phi}{\partial y^\prime} \rb = 0 
 \end{empheq}
     \text{Derivation of the above equation that is easy to follow is  
     \href{https://farside.ph.utexas.edu/teaching/336L/Fluid/node266.html}{here}}
@@ -112,7 +118,7 @@ derivative with respective $\lambda$ as follows.
 %%Equation 4
 \begin{empheq}[box=\tcbhighmath]{equation}
   \begin{split}
-      & f(x) + T \left\{ 1  + ln(p(x)) \right\} + \lambda = 0
+      & f(x) + T \lcb 1  + ln(p(x)) \rcb + \lambda = 0
   \end{split}
 \end{empheq}
 
@@ -128,14 +134,14 @@ Setting derivative with respect to $\lambda$ to zero yields the contraint that P
 Rearranging eqn.4 
 \begin{empheq}[box=\tcbhighmath]{equation}
   \begin{split}
-      &  p(x) =  e^{ -\left( 1 + \lambda / T  \right) }   \: e^{-f(x)/T}
+      &  p(x) =  e^{ -\lb 1 + \lambda / T  \rb }   \: e^{-f(x)/T}
   \end{split}
 \end{empheq}
 
 Combining eqns. 5 and 6 the value of lambda can be expressed as follows
 \begin{empheq}[box=\tcbhighmath]{equation}
   \begin{split}
-      &  \lambda = T \left\{ ln \int e^{-f(x)/T} dx  - 1 \right\}
+      &  \lambda = T \lcb ln \int e^{-f(x)/T} dx  - 1 \rcb
   \end{split}
 \end{empheq}
 
@@ -224,7 +230,7 @@ provides lucid explanation.
 
 \begin{empheq}[box=\tcbhighmath]{equation}
   \begin{split}
-      & \delFfEta = \frac{d}{d\epsilon} F\left(\fe\right) \Bigr\rvert_{\epsilon=0} \\
+      & \delFfEta = \frac{d}{d\epsilon} F\lb\fe\rb \Bigr\rvert_{\epsilon=0} \\
       & \text{where} \\     
       & \left < \nabla F_f, \eta \right > = \int \nabla F_f \eta (x) dx 
   \end{split}
@@ -233,21 +239,21 @@ provides lucid explanation.
 \begin{equation*}
   \begin{split}
       \delFfEta  &=  \frac{d}{d \epsilon} \int  {\PHIe} dx  \Bigr\rvert_{\epsilon=0} \\
-                 &= \int \left\{
-                    \eta \pder{\PHIe}{\left(\fe\right)}
-                   + \eta^\prime \pder{\PHIe}{\left(\fep\right)}
-                   \right\} dx
+                 &= \int \lcb
+                    \eta \pder{\PHIe}{\lb\fe\rb}
+                   + \eta^\prime \pder{\PHIe}{\lb\fep\rb}
+                   \rcb dx
                    \Bigr\rvert_{\epsilon=0} \\
-                 &= \int \left\{
+                 &= \int \lcb
                     \eta \pder{\PHI}{f}
                   + \eta^\prime  \pder{\PHI}{f^\prime}
-                 \right\} dx \\ 
+                 \rcb dx \\ 
                  &= \int  \eta \pder{\PHI}{f} dx 
                     + \cancelto{0}{\Bigg[\eta \pder{\PHI}{f} \Bigg]_{a}^{b}} 
-                    - \int  \eta \frac{d}{dx} \left\{ \pder{\PHI}{f^\prime} \right\} dx  \\
+                    - \int  \eta \frac{d}{dx} \lcb \pder{\PHI}{f^\prime} \rcb dx  \\
                  &= \int  \eta \Bigg[
                                    \pder{\PHI}{f}  -
-                                    \frac{d}{dx} \left\{ \pder{\PHI}{f^\prime} \right\} 
+                                    \frac{d}{dx} \lcb \pder{\PHI}{f^\prime} \rcb 
                       \Bigg] dx 
   \end{split}              
 \end{equation*}
@@ -257,7 +263,7 @@ provides lucid explanation.
 \begin{empheq}[box=\tcbhighmath]{equation}
   \begin{split}
       \nabla F_f = \pder{\PHI}{f}  
-                   - \frac{d}{dx} \left\{ \pder{\PHI}{f^\prime} \right\}
+                   - \frac{d}{dx} \lcb \pder{\PHI}{f^\prime} \rcb
   \end{split}
 \end{empheq}
 
@@ -267,13 +273,13 @@ eliminate $\eta\prime$ through integration by parts.
 
 \begin{empheq}[box=\tcbhighmath]{equation}
   \begin{split}
-    Q(f,\eta) &= \frac{d^2}{d\epsilon^2} F\left(\fe\right) \Bigr\rvert_{\epsilon=0} \\
-                 &= \int \left\{
+    Q(f,\eta) &= \frac{d^2}{d\epsilon^2} F\lb\fe\rb \Bigr\rvert_{\epsilon=0} \\
+                 &= \int \lcb
                     \eta^2 \pders{\phi}{f}
-		  + \left(\eta^\prime\right)^2  \pders{\phi}{f^\prime}
+		  + \lb\eta^\prime\rb^2  \pders{\phi}{f^\prime}
 		  + 2 \eta \eta^\prime \frac{\partial^2{\phi}}
 				            {\partial{f}\partial{f^\prime}}
-		  \right\} dx
+		  \rcb dx
    \end{split}
 \end{empheq}
 
@@ -290,20 +296,20 @@ Expressing $Q(f,\eta)$ as follows
 
 \begin{equation*}
   \begin{split}
-    Q(f,\eta)   &= \int \left\{ A  \eta^2 
+    Q(f,\eta)   &= \int \lcb A  \eta^2 
 		                  + 2 B \eta \eta^\prime 
-		                  + C \left(\eta^\prime\right)^2  
-		          \right\} dx \\
+		                  + C \lb\eta^\prime\rb^2  
+		          \rcb dx \\
      & where \:\:  
 		    A =  \pders{\phi}{f}  \:;\:  
 		    B =  \frac{\partial^2\phi}{\partial f\partial {f^\prime}} \:;\:  
 		    C =  \pders{\phi}{f^\prime}  \\
-     &= \int \left\{ A \eta^2 + B \frac{d}{dx}\left(\eta^2\right)    
-		                  + C \left(\eta^\prime\right)^2  
-		          \right\} dx \\
-     &= \int \left\{ A \eta^2 - B^\prime \eta^2
-		                  + C \left(\eta^\prime\right)^2  
- 	      \right\} dx  \:\:  
+     &= \int \lcb A \eta^2 + B \frac{d}{dx}\lb\eta^2\rb    
+		                  + C \lb\eta^\prime\rb^2  
+		          \rcb dx \\
+     &= \int \lcb A \eta^2 - B^\prime \eta^2
+		                  + C \lb\eta^\prime\rb^2  
+ 	      \rcb dx  \:\:  
   \end{split}
 \end{equation*}
 Nb: The last simplification is achieved with integration by parts and  noting $\eta$ vanishes on boundaries
@@ -317,8 +323,8 @@ The two necessary conditions for second variant to be positive definite are as f
     \text{Condition 2:} & \\
     &\text{The following linear differential has} \\
     & \text{no other solution but a trivial solution $v=0$} \\
-    &	   - \frac{d}{dx} \left( C \eta^\prime \right)  + 
-	   \left( A - B^\prime \right) \eta = 0
+    &	   - \frac{d}{dx} \lb C \eta^\prime \rb  + 
+	   \lb A - B^\prime \rb \eta = 0
    \end{split}
 \end{empheq}
 \end{tcolorbox}
@@ -333,23 +339,27 @@ Referring back to our original Lagrangian in equation 1 the second variation can
                  \begin{cases}
                  \begin{rcases}
                      \begin{split}
-                     & \int f(x) \left\{ p(x)+\epsilon \eta(x) \right\} dx
-                           + T \int  \left\{ p(x) + \epsilon \eta(x) \right\} 
-                              ln \left\{ p(x)  + \epsilon \eta(x) \right\}dx \\ 
-                         &\qqad\qquad      + \int \left\{ p(x)+\epsilon \eta(x) \right\}
-                         dx \right\} 
+                     & \int f(x) \lcb p(x)+\epsilon \eta(x) \rcb dx
+                           + T \int  \lcb p(x) + \epsilon \eta(x) \rcb 
+                              ln \lcb p(x)  + \epsilon \eta(x) \rcb dx \\ 
+                         &\qqad\qquad      + \int \lcb p(x)+\epsilon \eta(x) \rcb
+                         dx \rcb  
                      \end{split}
                  \end{rcases}
                  \end{cases}
-                  \\ & = \lim_{\epsilon \to 0} \frac{d}{d\epsilon} 
-                  \left\{
-                    \int f(x) \eta(x) dx
-                      + T \int   \eta(x) \left\{
-                                      ln \left\{ p(x)  + \epsilon \eta(x) \right\} + 1
-                                      \right\} dx  \right}
+                   \\ & = \lim_{\epsilon \to 0} \frac{d}{d\epsilon} 
+                  \lcb \int f(x) \eta(x) dx
+                         + T \int   \eta(x) \lsb 
+                             ln \lcb p(x)  + \epsilon \eta(x) \rcb  + 1 \rsb dx 
+                         +    \int \eta(x) dx
+                                         \rcb \\
+                  & =  T * \int \frac{\eta^2(x)}{p(x)} dx   
     \end{align}
 \end{equation*}
 
+Fortunately it turns out for our case, it is clear that sigin of the  second variation is same as that of $T$ 
+    because $p(x)$ and $\eta^2$ are always positive. This explains our observed trend where our stationary points 
+    tunred out to be minima when T is positive, and maxima when T is positive.
 \end{tcolorbox}
 
 

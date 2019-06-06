@@ -1,0 +1,10 @@
+
+                  & = \frac{d}{d\epsilon} \left\{
+                    \int f(x) \eta(x) dx
+                  + T \int   \eta(x) ln \left\{ p(x)  + \epsilon \eta(x) \right \} + 1  dx
+                   + \int \eta(x) dx \right\} \Bigr\rvert_{\epsilon=0} 
+
+
+
+                     &\qquad\qquad  +  \int  p(x) + \epsilon \eta(x)  dx 
+                     \right \} \Bigr\rvert_{\epsilon=0} \\
