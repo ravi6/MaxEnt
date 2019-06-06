@@ -163,7 +163,7 @@ Combining eqns. 5 and 6 the value of lambda can be expressed as follows
 \end{tcolorbox}
 
 \begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
-  title={Change in pdf with T when $T \le 0$ and $T \ge 0$} ]
+  title=Change in pdf with T when $T \le 0$ and $T \ge 0$ ]
      \includegraphics[scale=0.25]{fig1.jpg}
      \hspace{1cm}
      \includegraphics[scale=0.32]{fig2.jpg}
@@ -188,7 +188,7 @@ Using the above function, the effect of $T$ on PDF corresponding to the stationa
 point is determined as described earlier.
 
 \begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
-    title={Effect of $T$ on PDF at stationary condition}  ]
+    title=Effect of $T$ on PDF at stationary condition]
      \includegraphics[scale=0.3]{fig3.jpg}
      \hspace{1cm}
      \includegraphics[scale=0.3]{fig4.jpg}
@@ -213,7 +213,8 @@ function.
 In this section the derivation of functional derivatives 
 is provided. While there is no shortage of articles on this topic,
 thesis work by 
-\href{https://www2.math.uconn.edu/~gordina/NelsonAaronHonorsThesis2012.pdf}{Aaron Neson}
+\href
+    {http://www-users.math.umn.edu/~olver/ln_/cv.pdf}{Peter J. Oliver} from University of Minnesota.
 provides lucid explanation.
 
     Let $\eta(x)$ be an arbitrary function which vanishes to zero at the boundaries, and 
@@ -308,7 +309,7 @@ Expressing $Q(f,\eta)$ as follows
 Nb: The last simplification is achieved with integration by parts and  noting $\eta$ vanishes on boundaries
 
 The necessary and sufficient conditions for $Q(f,\eta)$ to be positive requires fairly involved mathematics and is nicely covered in text book (page 100-110) on \href{https://epdf.pub/calculus-of-variations3a9621c1bc7c0b0a7e6500c574abb0e427979.html}{Variational Calculus}
-The two conditions are as follows.
+The two necessary conditions for second variant to be positive definite are as follows.
 \begin{empheq}[box=\tcbhighmath]{equation}
   \begin{split}
     \text{Condition 1:} & \\
@@ -321,6 +322,40 @@ The two conditions are as follows.
    \end{split}
 \end{empheq}
 \end{tcolorbox}
+
+
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+    title={The role of sign of scaling parameter T in equation (1) explained} ]
+Referring back to our original Lagrangian in equation 1 the second variation can be calculated as follows.
+\begin{equation*}
+    \begin{align}
+        Q(p,\eta) & = \lim_{\epsilon \to 0}  \frac{d^2}{d\epsilon^2} 
+                 \begin{cases}
+                 \begin{rcases}
+                     \begin{split}
+                     & \int f(x) \left\{ p(x)+\epsilon \eta(x) \right\} dx
+                           + T \int  \left\{ p(x) + \epsilon \eta(x) \right\} 
+                              ln \left\{ p(x)  + \epsilon \eta(x) \right\}dx \\ 
+                         &\qqad\qquad      + \int \left\{ p(x)+\epsilon \eta(x) \right\}
+                         dx \right\} 
+                     \end{split}
+                 \end{rcases}
+                 \end{cases}
+                  \\ & = \lim_{\epsilon \to 0} \frac{d}{d\epsilon} 
+                  \left\{
+                    \int f(x) \eta(x) dx
+                      + T \int   \eta(x) \left\{
+                                      ln \left\{ p(x)  + \epsilon \eta(x) \right\} + 1
+                                      \right\} dx  \right}
+    \end{align}
+\end{equation*}
+
+\end{tcolorbox}
+
+
+
+
+
 
 \end{document}
 
