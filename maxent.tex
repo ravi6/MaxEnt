@@ -342,7 +342,7 @@ Referring back to our original Lagrangian in equation 1 the second variation can
                      & \int f(x) \lcb p(x)+\epsilon \eta(x) \rcb dx
                            + T \int  \lcb p(x) + \epsilon \eta(x) \rcb 
                               ln \lcb p(x)  + \epsilon \eta(x) \rcb dx \\ 
-                         &\qqad\qquad      + \int \lcb p(x)+\epsilon \eta(x) \rcb
+                         &\qqad\qquad  + \int \lcb p(x)+\epsilon \eta(x) \rcb
                          dx \rcb  
                      \end{split}
                  \end{rcases}
@@ -350,9 +350,8 @@ Referring back to our original Lagrangian in equation 1 the second variation can
                    \\ & = \lim_{\epsilon \to 0} \frac{d}{d\epsilon} 
                   \lcb \int f(x) \eta(x) dx
                          + T \int   \eta(x) \lsb 
-                             ln \lcb p(x)  + \epsilon \eta(x) \rcb  + 1 \rsb dx 
-                         +    \int \eta(x) dx
-                                         \rcb \\
+                          ln \lcb p(x)  + \epsilon \eta(x) \rcb  + 1 \rsb dx 
+                         +    \int \eta(x) dx \rcb \\
                   & =  T * \int \frac{\eta^2(x)}{p(x)} dx   
     \end{align}
 \end{equation*}
@@ -366,9 +365,42 @@ Referring back to our original Lagrangian in equation 1 the second variation can
 \end{tcolorbox}
 
 
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+    title={Distributed MonteCarlo Tree Search Algorithm} ]
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+      \mathcal{L}\lb q_i, \lambda_i \quad  i=1..N\rb & =
+           \int G(x_1, x_2, ... x_N) \prod_{i=1}^{N} q_i(x_i) \quad dx_1 dx_2 .. dx_N
+          \\ & + T \sum_{i=1}^{N} \int q_i(x_i) ln(q_i(x_i)) dx_i 
+          \\ & + \sum_{i=1}^{N}\lambda_i \lcb \lb \int q(x_i) dx_i \rb - 1  \rcb 
+  \end{split}
+\end{empheq}
 
+The above Lagrangian is formed to enable minimise the global objective function $G$ which is a function of all the
+variables $x_1, x_2 ... x_N$. The probability distribution function (PDF) of each agent is represneted by $q_i(x_i)$.
+It is assumed that the approximate collective PDF can be represented as product of distribution functions of each agent. This
+assumption enables decentralization of each agents actions while allowing optimization of the global objective function $G$.
+    The stationary conditions for  Lagrangian in eqn. 12 with respect of $q_k(x_k)$ and $\lambda_k$ can be written as follows.
 
-
-
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{rcases}
+  \begin{split}
+      \nabla_{q_k}\mathcal{L} &=
+        \int G(x_1, x_2, ... x_N) \prod_{i \ne k} q_i(x_i) \quad \prod_{i \ne k} dx_i
+           + T \lcb  1 +  ln(q_k(x_k)) \rcb 
+           + \lambda_k  \\
+        & =  E(G|x=x_k) 
+           + T \lcb  1 +  ln(q_k(x_k)) \rcb 
+           + \lambda_k  = 0 \\
+      \nabla_{\lambda_k}\mathcal{L} &=
+            \lcb \lb \int q(x_k) dx_k \rb - 1  \rcb = 0 
+  \end{split}
+  \end{rcases} _{k=1..N}
+\end{empheq}
+The Lagrangian parameter $\lambda_k$ can be elemenated from the above two conditions
+and it is trivial show that 
+\begin{empheq}[box=\tcbhighmath]{equation}
+    q_k(x_k) = \frac{e^{-E(G|x=x_k)/T}}{\int e^{-E(G|x=x_k)/T} dx_k} 
+\end{empheq}
+\end{tcolorbox}
 \end{document}
-
