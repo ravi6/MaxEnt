@@ -359,7 +359,7 @@ Referring back to our original Lagrangian in equation 1 the second variation can
     From the above derivation it is clear that sign of the  second variation of the Lagrangian of our interest (Eq. 1)
     is same as that of $T$ 
     because $p(x)$ and $\eta^2$ are always positive. This explains our observed trends (with few sample functions)
-    where stationary points tunred out to be minima when T is positive, and maxima when T is positive.
+    where stationary points turned out to be minima when T is positive, and maxima when T is negative.
     Since the above derivation is valid for any generic function $f(x)$ we can use this result to seek either maxima
     or minima for the MaxEnt problem by appropriate choice of sign for T.
 \end{tcolorbox}
@@ -435,6 +435,50 @@ and it is trivial show that
       \frac {p^{new}(x)}{p^0(x)} &=   1 - S(p^0) - ln(p^0(x)) - \frac{1}{T} \lcb f(x) - E(f,p^0) \rcb \\
   \end{split}
 \end{epheq}
+
+
+Armed with the above template to seek extrema for a Lagrangian based on collective probability distribution, it is
+relatively straightforward to apply this template to the Lagrangian with collective probability replaced by product
+distributions as shown in eqn. 12. 
+\end{tcolorbox}
+
+\begin{tcolorbox}[fonttitle=\sffamily\bfseries\large,
+    title={Entropy Term in DMCTS} ]
+
+    It is worth noting that the entropy term in the Lagrangian (eqn. 12) is strictly
+    not based the collective probability. The exact entropy of the collective
+    probability distribution should have been as follows.
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+           T \int \lcb \prod_{i=1}^{N} q_i(x_i) \rcb 
+               ln \lcb \prod_{i=1}^{N} q_i(x_i) \rcb 
+               \quad dx_1 dx_2 .. dx_N  \\
+            = T \sum_{k=1}^{N} \int 
+                \lcb \prod_{i=1}^{N} q_i(x_i) \rcb 
+                 ln (q_k(x_k))
+                 \quad dx_1 dx_2 .. dx_N  \\
+  \end{split}
+\end{empheq}
+
+    Replacing the collective probability ($\prod_{i=1}^{N} q_i(x_i)$) in the integral
+with individual probability associated with each term in the summation, the collective 
+entropy term becomes
+\begin{empheq}[box=\tcbhighmath]{equation}
+  \begin{split}
+            = T \sum_{k=1}^{N} \int 
+                 q_k(x_k) 
+                 ln (q_k(x_k)) dx_k  \\
+  \end{split}
+\end{empheq}
+
+    This virtually amounts to minimising cumulative cross entropy (often referred to as Kulbec
+    entropy differential) of all distributions relative to the collective. Another way to 
+    interpret this is to say that instead of minimizing true entropy of the collective distribution,
+    we minimize the sum of individual entropies. Since sum of any arbitray isolated systems
+    entropies is always less than entropy of the combined system without isolation, the maxEnt search
+    is biased to some extent. It appears that rationale for introduction of this restriction is to eliminate cross
+    term derivatives in Jacobian during Newton steps.
+
 \end{tcolorbox}
 
 \end{document}
